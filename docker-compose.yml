@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  # Appium server (no emulator). For real devices, you must also pass USB through
+  # and usually run the container privileged.
+  appium:
+    image: appium/appium:v2.19.0-p4
+    container_name: appium
+    ports:
+      - "4723:4723"
+    environment:
+      APPIUM_BASE_PATH: "/"
+    # For USB real device (Linux agents). On Windows Docker Desktop this is hard.
+    # privileged: true
+    # volumes:
+    #   - /dev/bus/usb:/dev/bus/usb
+
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mobilex-tests
+    depends_on:
+      - appium
+    environment:
+      # Allow overriding from the host or Jenkins with APPIUM_SERVER_URL.
+      # Default points to the compose service 'appium'.
+      APPIUM_SERVER_URL: ${APPIUM_SERVER_URL:-http://appium:4723}
+    volumes:
+      # Persist results to host for Jenkins archival
+      - ./target:/workspace/target
+    command: ["mvn", "-q", "test"]

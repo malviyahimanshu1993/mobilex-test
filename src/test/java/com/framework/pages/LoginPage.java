@@ -46,7 +46,6 @@ public class LoginPage extends BasePage {
     public void verifyErrorMessage(String s) {
         // Implementation for verifying error message
         String actualMessage = errorMessage.getText();
-        System.out.println("page source: " +driver.getPageSource());
         if (!actualMessage.equals(s)) {
             throw new AssertionError("Expected error message: " + s + " but got: " + actualMessage);
         }
