@@ -8,7 +8,13 @@ services:
     # For local debugging where you want to access Appium from the host, enable the "host-expose" profile.
     environment:
       APPIUM_BASE_PATH: "/"
+      LOG_LEVEL: "debug"
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "sh", "-lc", "wget -qO- http://127.0.0.1:4723/status >/dev/null 2>&1"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
     # For USB real device (Linux agents). On Windows Docker Desktop this is hard.
     # privileged: true
     # volumes:
@@ -29,7 +35,9 @@ services:
       context: .
       dockerfile: Dockerfile
     depends_on:
-      - appium
+      appium:
+        condition: service_healthy
+        required: true
     environment:
       # Allow overriding from the host or Jenkins with APPIUM_SERVER_URL.
       # Default points to the compose service 'appium'.
