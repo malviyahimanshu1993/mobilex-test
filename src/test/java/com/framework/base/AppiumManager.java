@@ -36,7 +36,10 @@ public final class AppiumManager {
     }
 
     public static synchronized void startIfLocal() {
+        // Only start Appium programmatically when explicitly enabled.
+        // In CI/Docker, Appium is typically provided externally.
         if (!Config.get().startLocalAppium()) {
+            System.out.println("AppiumManager: appium.local=false; will not try to start a local Appium server.");
             return;
         }
 
@@ -86,10 +89,13 @@ public final class AppiumManager {
 
         int portToUse = Config.get().appiumPort();
 
-        // If a required major is requested but no explicit appium.js provided, prefer npx
-        if (requiredMajor > 0 && !haveExplicitAppiumJs) {
-            System.out.println("Skipping AppiumDriverLocalService because appium.major.version=" + requiredMajor + " and no appium.node/appium.js provided. Using npx fallback to fetch the required Appium major.");
-        } else {
+        // Prefer AppiumDriverLocalService when we have explicit node/appium.js.
+        // If not, we may fall back to npx *only if enabled*.
+        if (!haveExplicitAppiumJs) {
+            System.out.println("AppiumManager: appium.local=true but appium.node/appium.js not provided.");
+        }
+
+        if (haveExplicitAppiumJs) {
             try {
                 service = AppiumDriverLocalService.buildService(builder);
                 service.start();
@@ -97,18 +103,14 @@ public final class AppiumManager {
                 if (service.isRunning()) {
                     System.out.println("Started Appium service via AppiumDriverLocalService on " + Config.get().appiumHost() + ":" + portToUse);
 
-                    // validate version
-                    if (!validateAppiumVersion(requiredMajor, timeoutSec)) {
-                        if (!validateAppiumVersion(requiredMajor, timeoutSec, portToUse)) {
-                            try {
-                                service.stop();
-                            } catch (Exception ignored) {
-                            }
-                            service = null;
-                            throw new IllegalStateException("Appium server does not meet required major version: " + requiredMajor);
+                    if (!validateAppiumVersion(requiredMajor, timeoutSec, portToUse)) {
+                        try {
+                            service.stop();
+                        } catch (Exception ignored) {
                         }
+                        service = null;
+                        throw new IllegalStateException("Appium server does not meet required major version: " + requiredMajor);
                     }
-
                     return;
                 }
             } catch (Throwable t) {
@@ -119,7 +121,10 @@ public final class AppiumManager {
 
         // Fallback to external npx invocation
         if (!Config.get().appiumFallbackEnabled()) {
-            throw new IllegalStateException("AppiumDriverLocalService failed to start and fallback is disabled (appium.fallback.enabled=false). Check Appium installation or configure appium.node/appium.js.");
+            throw new IllegalStateException(
+                    "Local Appium start is enabled (appium.local=true) but AppiumDriverLocalService could not be started " +
+                            "(missing/invalid appium.node/appium.js) and fallback is disabled (appium.fallback.enabled=false). " +
+                            "Either provide appium.node/appium.js or disable appium.local and point to an external Appium using appiumServerUrl/APPIUM_SERVER_URL.");
         }
 
         try {
@@ -154,7 +159,6 @@ public final class AppiumManager {
             cmd.add(npx);
 
             if (requiredMajor > 0) {
-                // Use explicit flags to cause npx to fetch and run the requested package version
                 cmd.add("--yes");
                 cmd.add("--package");
                 cmd.add("appium@" + requiredMajor);
@@ -174,16 +178,13 @@ public final class AppiumManager {
             File logFile = new File(System.getProperty("user.dir"), "target/appium.log");
             File parent = logFile.getParentFile();
             if (parent != null && !parent.exists()) {
-                boolean ok = parent.mkdirs();
-                if (!ok) {
-                    System.out.println("Warning: failed to create log directory: " + parent.getAbsolutePath());
-                }
+                //noinspection ResultOfMethodCallIgnored
+                parent.mkdirs();
             }
             pb.redirectOutput(ProcessBuilder.Redirect.appendTo(logFile));
 
             externalProcess = pb.start();
 
-            // Give the server a short time to start.
             Thread.sleep(2500);
 
             if (externalProcess.isAlive()) {
@@ -204,8 +205,7 @@ public final class AppiumManager {
             // Provide a clearer error if npx is missing (common in minimal CI containers)
             String msg = e.getMessage() == null ? "" : e.getMessage();
             if (msg.toLowerCase().contains("cannot run program \"npx\"") || msg.toLowerCase().contains("no such file") || msg.toLowerCase().contains("error=2")) {
-                System.out.println("Failed to start external Appium process: 'npx' was not found. " +
-                        "Either install Node.js/npm in this environment OR set appium.local=false and provide appiumServerUrl to an existing Appium server.");
+                System.out.println("Failed to start external Appium process: 'npx' was not found. Install Node.js/npm in the same environment that runs tests, or disable appium.local and use an external Appium server.");
             } else {
                 System.out.println("Failed to start external Appium process: " + msg);
             }
