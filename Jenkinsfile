@@ -37,17 +37,35 @@ pipeline {
           function Test-Url($url) {
             try {
               $resp = Invoke-WebRequest -UseBasicParsing -TimeoutSec 2 -Uri $url
-              return ($resp.StatusCode -ge 200 -and $resp.StatusCode -lt 300)
-            } catch { return $false }
+              # Consider any HTTP response as reachable (2xx/3xx/4xx). We only need to know the server is up.
+              return ($resp.StatusCode -ge 200 -and $resp.StatusCode -lt 500)
+            } catch {
+              return $false
+            }
           }
 
+          # Prefer checking Appium on localhost first
           $statusUrl = 'http://127.0.0.1:4723/status'
 
           if (-not (Test-Url $statusUrl)) {
             Write-Host 'Appium not responding on 127.0.0.1:4723. Attempting to start Appium 2.x...'
-            # Requires Node.js + Appium installed on the agent:
-            #   npm i -g appium@2
-            Start-Process -FilePath 'appium' -ArgumentList '--address 0.0.0.0 --port 4723 --base-path /' -NoNewWindow
+
+            # Ensure Node/npm are installed on the agent
+            $node = (Get-Command node -ErrorAction SilentlyContinue)
+            $npx  = (Get-Command npx  -ErrorAction SilentlyContinue)
+            if (-not $node -or -not $npx) {
+              throw 'Node.js/npm (npx) not found on this agent. Install Node.js LTS and run: npm i -g appium@2'
+            }
+
+            # Start appium via npx to avoid broken global shim issues.
+            $log = Join-Path $env:WORKSPACE 'appium-host.log'
+            $cmd = "npx.cmd --yes appium@2 appium --address 0.0.0.0 --port 4723 --base-path /"
+
+            Write-Host "Starting: $cmd"
+            Write-Host "Logging to: $log"
+
+            # Use cmd.exe so npx.cmd resolution is reliable under Jenkins.
+            Start-Process -FilePath 'cmd.exe' -ArgumentList "/c $cmd 1>>\"$log\" 2>>&1" -WindowStyle Hidden
           } else {
             Write-Host 'Appium already running.'
           }
@@ -62,7 +80,7 @@ pipeline {
             Start-Sleep -Seconds 2
           }
 
-          throw 'Timed out waiting for Appium /status on 127.0.0.1:4723'
+          throw 'Timed out waiting for Appium /status on 127.0.0.1:4723. Check appium-host.log in the workspace.'
         '''
       }
     }
