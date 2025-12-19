@@ -13,12 +13,14 @@ public class BaseTest {
 
     @BeforeSuite(alwaysRun = true)
     public void globalSetUp() {
-        AppiumManager.startIfLocal();
+        // In Jenkins, Appium is started on the agent (host) and tests run in Docker.
+        // Never attempt to start Appium programmatically from inside the tests JVM/container.
+        // Appium endpoint is provided via appiumServerUrl / APPIUM_SERVER_URL.
     }
 
     @AfterSuite(alwaysRun = true)
     public void globalTearDown() {
-        AppiumManager.stopIfStarted();
+        // No-op: do not manage Appium lifecycle from tests.
     }
 
     @BeforeMethod(alwaysRun = true)
