@@ -39,6 +39,22 @@ public final class AppiumManager {
         if (!Config.get().startLocalAppium()) {
             return;
         }
+
+        // If the configured server URL is not local, assume Appium is provided externally
+        // (e.g., docker-compose service name 'appium') and do not attempt to start anything.
+        // This avoids trying to run 'npx appium' inside the tests container.
+        try {
+            String url = Config.get().appiumServerUrl();
+            if (url != null) {
+                String normalized = url.trim().toLowerCase();
+                if (normalized.startsWith("http://appium") || normalized.startsWith("http://host.docker.internal") || normalized.startsWith("http://docker.for.win.localhost")) {
+                    System.out.println("AppiumManager: appium.local=true but appiumServerUrl points to an external host ('" + url + "'); skipping local Appium start.");
+                    return;
+                }
+            }
+        } catch (Exception ignored) {
+        }
+
         if (service != null && service.isRunning()) {
             return;
         }
@@ -129,6 +145,7 @@ public final class AppiumManager {
             List<String> cmd = new ArrayList<>();
             String npx = isWindows() ? "npx.cmd" : "npx";
             cmd.add(npx);
+
             if (requiredMajor > 0) {
                 // Use explicit flags to cause npx to fetch and run the requested package version
                 cmd.add("--yes");
@@ -177,7 +194,14 @@ public final class AppiumManager {
                 externalProcess = null;
             }
         } catch (IOException | InterruptedException e) {
-            System.out.println("Failed to start external Appium process: " + e.getMessage());
+            // Provide a clearer error if npx is missing (common in minimal CI containers)
+            String msg = e.getMessage() == null ? "" : e.getMessage();
+            if (msg.toLowerCase().contains("cannot run program \"npx\"") || msg.toLowerCase().contains("no such file") || msg.toLowerCase().contains("error=2")) {
+                System.out.println("Failed to start external Appium process: 'npx' was not found. " +
+                        "Either install Node.js/npm in this environment OR set appium.local=false and provide appiumServerUrl to an existing Appium server.");
+            } else {
+                System.out.println("Failed to start external Appium process: " + msg);
+            }
             externalProcess = null;
         }
     }

@@ -38,6 +38,12 @@ public final class Config {
     }
 
     private String get(String key, String defaultValue) {
+        // Allow env var overrides for common CI/container setups
+        // Example: APPIUM_SERVER_URL=http://appium:4723
+        if ("appiumServerUrl".equals(key)) {
+            String envUrl = System.getenv("APPIUM_SERVER_URL");
+            if (envUrl != null && !envUrl.isBlank()) return expandVars(envUrl);
+        }
         String sys = System.getProperty(key);
         if (sys != null && !sys.isBlank()) return expandVars(sys);
         String fileVal = fileProps.getProperty(key);
@@ -78,7 +84,15 @@ public final class Config {
     }
 
     public String appiumServerUrl() {
-        return get("appiumServerUrl", "http://127.0.0.1:4723");
+        String url = get("appiumServerUrl", "http://127.0.0.1:4723");
+        if (url == null) return null;
+        url = url.trim();
+        // Normalize: Appium 2 default base-path is '/', not '/wd/hub'.
+        // If user passes a full /wd/hub URL, keep it; otherwise strip trailing slash.
+        if (url.endsWith("/") && !url.endsWith("/wd/hub/")) {
+            url = url.substring(0, url.length() - 1);
+        }
+        return url;
     }
 
     /** Start/stop local Appium 2.x server in code (default: false). */
