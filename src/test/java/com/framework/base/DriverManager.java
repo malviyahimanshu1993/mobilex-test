@@ -8,6 +8,7 @@ import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.options.XCUITestOptions;
 import io.appium.java_client.remote.AutomationName;
 
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -26,6 +27,9 @@ public final class DriverManager {
         if (DRIVER.get() != null) return;
 
         String serverUrl = resolveServerUrl();
+
+        // Fail fast if Appium is not reachable from this JVM/container.
+        assertAppiumReachable(serverUrl);
 
         if ("iOS".equalsIgnoreCase(platform)) {
             DRIVER.set(createIOSDriver(serverUrl));
@@ -153,5 +157,39 @@ public final class DriverManager {
         String url = Config.get().appiumServerUrl().trim();
         if (url.endsWith("/")) url = url.substring(0, url.length() - 1);
         return url;
+    }
+
+    private static void assertAppiumReachable(String serverUrl) {
+        // Accept both base and /wd/hub style URLs.
+        String statusUrl = serverUrl.endsWith("/wd/hub") ? serverUrl + "/status" : serverUrl + "/status";
+        long deadline = System.currentTimeMillis() + 30_000L;
+        Exception last = null;
+
+        while (System.currentTimeMillis() < deadline) {
+            try {
+                HttpURLConnection conn = (HttpURLConnection) new URL(statusUrl).openConnection();
+                conn.setConnectTimeout(2000);
+                conn.setReadTimeout(2000);
+                conn.setRequestMethod("GET");
+                int code = conn.getResponseCode();
+
+                if (code >= 200 && code < 500) {
+                    // 2xx is good; 4xx still proves the server is reachable (path mismatch handled separately).
+                    return;
+                }
+            } catch (Exception e) {
+                last = e;
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ignored) {
+                }
+            }
+        }
+
+        String hint = "";
+        if (serverUrl.contains("host.docker.internal")) {
+            hint = " If Appium runs on the Windows host, ensure it is started with --address 0.0.0.0 (not 127.0.0.1) and that Windows Firewall allows TCP 4723.";
+        }
+        throw new IllegalStateException("Cannot reach Appium server at '" + statusUrl + "'." + hint + (last != null ? (" Last error: " + last) : ""));
     }
 }
