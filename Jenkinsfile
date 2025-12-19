@@ -29,13 +29,12 @@ pipeline {
       steps {
         script {
           echo "Running tests against Appium at ${env.APPIUM_SERVER_URL}"
-          // Run Maven tests inside the container.
-          // Mount workspace so surefire reports are written to host for Jenkins to archive.
-          // Note: host.docker.internal works on Docker Desktop Windows.
+          // Use %WORKSPACE% to avoid \t (tab) escape issues with %CD%\target.
+          // Double escaping (\\) is required in Groovy strings to pass a single backslash to cmd.
           bat '''
             docker run --rm ^
               -e APPIUM_SERVER_URL=%APPIUM_SERVER_URL% ^
-              -v "%CD%\target":/workspace/target ^
+              -v "%WORKSPACE%\\target":/workspace/target ^
               mobilex-test:ci mvn -q test
           '''
         }
