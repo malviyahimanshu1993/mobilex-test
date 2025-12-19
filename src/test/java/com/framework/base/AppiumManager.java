@@ -40,15 +40,22 @@ public final class AppiumManager {
             return;
         }
 
-        // If the configured server URL is not local, assume Appium is provided externally
-        // (e.g., docker-compose service name 'appium') and do not attempt to start anything.
-        // This avoids trying to run 'npx appium' inside the tests container.
+        // If running in Docker/CI and an external Appium endpoint is provided, never try to start Appium locally.
+        // This avoids trying to execute 'npx' inside the Maven test container.
+        // External endpoint can be provided via APPIUM_SERVER_URL env var or appiumServerUrl property.
         try {
+            String envUrl = System.getenv("APPIUM_SERVER_URL");
+            if (envUrl != null && !envUrl.isBlank()) {
+                System.out.println("AppiumManager: APPIUM_SERVER_URL is set ('" + envUrl + "'); skipping local Appium start.");
+                return;
+            }
             String url = Config.get().appiumServerUrl();
             if (url != null) {
                 String normalized = url.trim().toLowerCase();
-                if (normalized.startsWith("http://appium") || normalized.startsWith("http://host.docker.internal") || normalized.startsWith("http://docker.for.win.localhost")) {
-                    System.out.println("AppiumManager: appium.local=true but appiumServerUrl points to an external host ('" + url + "'); skipping local Appium start.");
+                // If URL is not loopback, treat as external.
+                boolean isLoopback = normalized.contains("127.0.0.1") || normalized.contains("localhost");
+                if (!isLoopback) {
+                    System.out.println("AppiumManager: appiumServerUrl points to an external host ('" + url + "'); skipping local Appium start.");
                     return;
                 }
             }
