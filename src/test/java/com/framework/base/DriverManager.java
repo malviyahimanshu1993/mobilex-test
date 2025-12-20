@@ -90,42 +90,42 @@ public final class DriverManager {
         String hostWorkspace = System.getenv("HOST_WORKSPACE");
         if (hostWorkspace != null && !hostWorkspace.isBlank()) {
             System.out.println("Detected HOST_WORKSPACE env var: " + hostWorkspace);
-            // Try to compute a relative path starting from the repository root (bundle-to-test/...)
-            String relPath = appPathStr;
+            // Compute a repo-relative path (e.g. bundle-to-test/...) from the configured appPath
+            String relPath = appPathStr == null ? "" : appPathStr;
             int idx = relPath.indexOf("bundle-to-test");
             if (idx != -1) {
                 relPath = relPath.substring(idx);
             } else {
-                // strip common container prefixes like /workspace/
                 if (relPath.startsWith("/workspace/")) relPath = relPath.substring("/workspace/".length());
                 else if (relPath.startsWith("/")) relPath = relPath.substring(1);
             }
-            // normalize separators for the host filesystem
+            // Normalize to host separators (Windows) to build a Windows-style path string
             relPath = relPath.replace('/', java.io.File.separatorChar).replace('\\', java.io.File.separatorChar);
-            Path apk = Path.of(hostWorkspace).resolve(relPath);
-            System.out.println("Resolved APK path using HOST_WORKSPACE: " + apk.toAbsolutePath());
-            if (!Files.exists(apk)) {
-                // In Docker the container cannot verify Windows host paths. Do NOT fail here.
-                System.out.println("WARNING: APK not found from inside the container at '" + apk.toAbsolutePath() + "'.\n" +
-                        "This is expected when using HOST_WORKSPACE: the container cannot see the Windows filesystem C:\\ path.\n" +
-                        "Proceeding to send the Windows path to Appium on the host; Appium must resolve the file.");
+
+            String windowsAppPath = hostWorkspace;
+            // Ensure hostWorkspace doesn't end with a separator before concatenation
+            if (!windowsAppPath.endsWith("" + java.io.File.separatorChar)) {
+                windowsAppPath = windowsAppPath + java.io.File.separatorChar + relPath;
+            } else {
+                windowsAppPath = windowsAppPath + relPath;
             }
-            options.setApp(apk.toAbsolutePath().toString());
+
+            System.out.println("Resolved APK path using HOST_WORKSPACE (Windows path to send to Appium): " + windowsAppPath);
+            System.out.println("INFO: Skipping container-side existence check for Windows host path. Appium on the host will resolve the file.");
+
+            // Send the raw Windows path as the 'app' capability without client-side normalization
+            options.setCapability("app", windowsAppPath);
             System.out.println("Expanded appPath: '" + appPathStr + "'");
         } else {
             // Fallback expansion for placeholders like ${user.dir} if present
             if (appPathStr != null && appPathStr.contains("${")) {
-                // Quick expansions for common placeholders
                 String userDir = System.getProperty("user.dir", "");
                 appPathStr = appPathStr.replace("${user.dir}", userDir)
                                        .replace("$user.dir", userDir)
                                        .replace("%USERPROFILE%", System.getProperty("user.home", ""))
                                        .replace("%userprofile%", System.getProperty("user.home", ""));
-
-                appPathStr = appPathStr.replace("${user.dir}", System.getProperty("user.dir"));
-                // support common environment variable style without braces if any
-                appPathStr = appPathStr.replace("$user.dir", System.getProperty("user.dir"));
             }
+
             // Normalize separators
             appPathStr = appPathStr.replace('/', java.io.File.separatorChar).replace('\\', java.io.File.separatorChar);
 
@@ -136,7 +136,7 @@ public final class DriverManager {
             System.out.println("Resolved APK path: " + apk.toAbsolutePath());
             if (!Files.exists(apk)) {
                 // Fallback: try replacing any ${user.dir} placeholders explicitly and stripping unknown placeholders
-                String cleaned = appPathStr.replace("${user.dir}", System.getProperty("user.dir"));
+                String cleaned = (appPathStr == null ? "" : appPathStr).replace("${user.dir}", System.getProperty("user.dir"));
                 cleaned = cleaned.replaceAll("\\$\\{[^}]+\\}", "");
                 Path alt = Path.of(cleaned);
                 if (!alt.isAbsolute()) alt = Path.of(System.getProperty("user.dir")).resolve(alt);
@@ -151,7 +151,6 @@ public final class DriverManager {
             System.out.println("Expanded appPath: '" + appPathStr + "'");
         }
 
-
         if (!cfg.appPackage().isBlank()) {
             options.setAppPackage(cfg.appPackage());
         }
@@ -164,6 +163,13 @@ public final class DriverManager {
         options.setCapability("appWaitActivity", cfg.appActivity());
         options.setCapability("appWaitPackage", cfg.appPackage());
         options.setCapability("appWaitDuration", 30000);
+
+        // Debug: print the final 'app' capability that will be sent to Appium
+        try {
+            Object finalAppCap = options.getCapability("app");
+            System.out.println("Final app capability to send to Appium: " + finalAppCap);
+        } catch (Exception ignored) {
+        }
 
         return new AndroidDriver(new URL(serverUrl), options);
     }
