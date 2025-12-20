@@ -105,7 +105,10 @@ public final class DriverManager {
             Path apk = Path.of(hostWorkspace).resolve(relPath);
             System.out.println("Resolved APK path using HOST_WORKSPACE: " + apk.toAbsolutePath());
             if (!Files.exists(apk)) {
-                throw new IllegalStateException("APK not found at '" + apk.toAbsolutePath() + "'. Ensure HOST_WORKSPACE is correct and bundle-to-test exists there.");
+                // In Docker the container cannot verify Windows host paths. Do NOT fail here.
+                System.out.println("WARNING: APK not found from inside the container at '" + apk.toAbsolutePath() + "'.\n" +
+                        "This is expected when using HOST_WORKSPACE: the container cannot see the Windows filesystem C:\\ path.\n" +
+                        "Proceeding to send the Windows path to Appium on the host; Appium must resolve the file.");
             }
             options.setApp(apk.toAbsolutePath().toString());
             System.out.println("Expanded appPath: '" + appPathStr + "'");
