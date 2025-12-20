@@ -29,12 +29,13 @@ pipeline {
       steps {
         script {
           echo "Running tests against Appium at ${env.APPIUM_SERVER_URL}"
-          // Use %WORKSPACE% to avoid \t (tab) escape issues with %CD%\target.
-          // Double escaping (\\) is required in Groovy strings to pass a single backslash to cmd.
+          // Mount the entire workspace and set the working directory inside the container
           bat '''
             docker run --rm ^
+              --add-host=host.docker.internal:host-gateway ^
               -e APPIUM_SERVER_URL=%APPIUM_SERVER_URL% ^
-              -v "%WORKSPACE%\\target":/workspace/target ^
+              -v "%WORKSPACE%":/workspace ^
+              -w /workspace ^
               mobilex-test:ci mvn -q test
           '''
         }
