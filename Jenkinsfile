@@ -35,7 +35,7 @@ pipeline {
                         docker run --rm ^
                         --add-host=host.docker.internal:host-gateway ^
                         -e APPIUM_SERVER_URL=%APPIUM_SERVER_URL% ^
-                        -e HOST_WORKSPACE="%CD%" ^
+                          -e HOST_WORKSPACE="%WORKSPACE%" ^
                         -v "%CD%":/workspace ^
                         -w /workspace ^
                         mobilex-test:ci mvn -q test

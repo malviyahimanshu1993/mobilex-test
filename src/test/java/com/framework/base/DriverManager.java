@@ -85,42 +85,68 @@ public final class DriverManager {
         // Resolve APK path: allow relative paths in config (resolved against project working dir)
         String appPathStr = cfg.appPath();
         System.out.println("Original appPath from config: '" + appPathStr + "'");
-        // Fallback expansion for placeholders like ${user.dir} if present
-        if (appPathStr != null && appPathStr.contains("${")) {
-        // Quick expansions for common placeholders
-        String userDir = System.getProperty("user.dir", "");
-        appPathStr = appPathStr.replace("${user.dir}", userDir)
-                               .replace("$user.dir", userDir)
-                               .replace("%USERPROFILE%", System.getProperty("user.home", ""))
-                               .replace("%userprofile%", System.getProperty("user.home", ""));
 
-            appPathStr = appPathStr.replace("${user.dir}", System.getProperty("user.dir"));
-            // support common environment variable style without braces if any
-            appPathStr = appPathStr.replace("$user.dir", System.getProperty("user.dir"));
-        }
-        // Normalize separators
-        appPathStr = appPathStr.replace('/', java.io.File.separatorChar).replace('\\', java.io.File.separatorChar);
-
-        Path apk = Path.of(appPathStr);
-        if (!apk.isAbsolute()) {
-            apk = Path.of(System.getProperty("user.dir")).resolve(apk);
-        }
-        System.out.println("Resolved APK path: " + apk.toAbsolutePath());
-        if (!Files.exists(apk)) {
-            // Fallback: try replacing any ${user.dir} placeholders explicitly and stripping unknown placeholders
-            String cleaned = appPathStr.replace("${user.dir}", System.getProperty("user.dir"));
-            cleaned = cleaned.replaceAll("\\$\\{[^}]+\\}", "");
-            Path alt = Path.of(cleaned);
-            if (!alt.isAbsolute()) alt = Path.of(System.getProperty("user.dir")).resolve(alt);
-            System.out.println("Initial APK not found. Trying alternative resolved path: " + alt.toAbsolutePath());
-            if (Files.exists(alt)) {
-                apk = alt;
+        // If Jenkins provided the Windows host workspace, prefer that path
+        String hostWorkspace = System.getenv("HOST_WORKSPACE");
+        if (hostWorkspace != null && !hostWorkspace.isBlank()) {
+            System.out.println("Detected HOST_WORKSPACE env var: " + hostWorkspace);
+            // Try to compute a relative path starting from the repository root (bundle-to-test/...)
+            String relPath = appPathStr;
+            int idx = relPath.indexOf("bundle-to-test");
+            if (idx != -1) {
+                relPath = relPath.substring(idx);
             } else {
-                throw new IllegalStateException("APK not found at '" + apk.toAbsolutePath() + "'. Set -DappPath if required.");
+                // strip common container prefixes like /workspace/
+                if (relPath.startsWith("/workspace/")) relPath = relPath.substring("/workspace/".length());
+                else if (relPath.startsWith("/")) relPath = relPath.substring(1);
             }
+            // normalize separators for the host filesystem
+            relPath = relPath.replace('/', java.io.File.separatorChar).replace('\\', java.io.File.separatorChar);
+            Path apk = Path.of(hostWorkspace).resolve(relPath);
+            System.out.println("Resolved APK path using HOST_WORKSPACE: " + apk.toAbsolutePath());
+            if (!Files.exists(apk)) {
+                throw new IllegalStateException("APK not found at '" + apk.toAbsolutePath() + "'. Ensure HOST_WORKSPACE is correct and bundle-to-test exists there.");
+            }
+            options.setApp(apk.toAbsolutePath().toString());
+            System.out.println("Expanded appPath: '" + appPathStr + "'");
+        } else {
+            // Fallback expansion for placeholders like ${user.dir} if present
+            if (appPathStr != null && appPathStr.contains("${")) {
+                // Quick expansions for common placeholders
+                String userDir = System.getProperty("user.dir", "");
+                appPathStr = appPathStr.replace("${user.dir}", userDir)
+                                       .replace("$user.dir", userDir)
+                                       .replace("%USERPROFILE%", System.getProperty("user.home", ""))
+                                       .replace("%userprofile%", System.getProperty("user.home", ""));
+
+                appPathStr = appPathStr.replace("${user.dir}", System.getProperty("user.dir"));
+                // support common environment variable style without braces if any
+                appPathStr = appPathStr.replace("$user.dir", System.getProperty("user.dir"));
+            }
+            // Normalize separators
+            appPathStr = appPathStr.replace('/', java.io.File.separatorChar).replace('\\', java.io.File.separatorChar);
+
+            Path apk = Path.of(appPathStr);
+            if (!apk.isAbsolute()) {
+                apk = Path.of(System.getProperty("user.dir")).resolve(apk);
+            }
+            System.out.println("Resolved APK path: " + apk.toAbsolutePath());
+            if (!Files.exists(apk)) {
+                // Fallback: try replacing any ${user.dir} placeholders explicitly and stripping unknown placeholders
+                String cleaned = appPathStr.replace("${user.dir}", System.getProperty("user.dir"));
+                cleaned = cleaned.replaceAll("\\$\\{[^}]+\\}", "");
+                Path alt = Path.of(cleaned);
+                if (!alt.isAbsolute()) alt = Path.of(System.getProperty("user.dir")).resolve(alt);
+                System.out.println("Initial APK not found. Trying alternative resolved path: " + alt.toAbsolutePath());
+                if (Files.exists(alt)) {
+                    apk = alt;
+                } else {
+                    throw new IllegalStateException("APK not found at '" + apk.toAbsolutePath() + "'. Set -DappPath if required.");
+                }
+            }
+            options.setApp(apk.toAbsolutePath().toString());
+            System.out.println("Expanded appPath: '" + appPathStr + "'");
         }
-        options.setApp(apk.toAbsolutePath().toString());
-        System.out.println("Expanded appPath: '" + appPathStr + "'");
 
 
         if (!cfg.appPackage().isBlank()) {
