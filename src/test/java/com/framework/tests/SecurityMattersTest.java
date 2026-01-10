@@ -4,8 +4,6 @@ import com.framework.annotations.TestInfo;
 import com.framework.base.BaseTest;
 import com.framework.pages.SecurityMattersPage;
 import io.appium.java_client.AppiumBy;
-import io.appium.java_client.pagefactory.AndroidBy;
-import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -13,7 +11,7 @@ import org.testng.annotations.Test;
 @TestInfo(author = "Himanshu", priority = "Smoke", component = "Security")
 public class SecurityMattersTest extends BaseTest {
 
-    @Test(priority = 0)
+    @Test()
     public void testSecurityMattersScreenElementsVisible() {
         SecurityMattersPage page = new SecurityMattersPage(getDriver())
                 .verifyHeadingIsVisible()
