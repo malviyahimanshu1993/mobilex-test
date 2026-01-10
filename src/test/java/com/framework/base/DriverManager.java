@@ -17,29 +17,34 @@ import java.time.Duration;
 
 public final class DriverManager {
 
-    private static final ThreadLocal<AppiumDriver> DRIVER = new ThreadLocal<>();
+    // Use static driver for suite-level sharing (single app session)
+    // Switch to ThreadLocal if parallel test execution with separate sessions is needed
+    private static volatile AppiumDriver driver;
+    private static final Object LOCK = new Object();
 
     private DriverManager() {
     }
 
-    // Initializes driver for the current thread. platform: "Android" or "iOS"
+    // Initializes driver (shared across all tests in the suite)
     public static void initDriver(String platform) throws MalformedURLException {
-        if (DRIVER.get() != null) return;
+        synchronized (LOCK) {
+            if (driver != null) return;
 
-        String serverUrl = resolveServerUrl();
+            String serverUrl = resolveServerUrl();
 
-        // Fail fast if Appium is not reachable from this JVM/container.
-        assertAppiumReachable(serverUrl);
+            // Fail fast if Appium is not reachable from this JVM/container.
+            assertAppiumReachable(serverUrl);
 
-        if ("iOS".equalsIgnoreCase(platform)) {
-            DRIVER.set(createIOSDriver(serverUrl));
-        } else {
-            DRIVER.set(createAndroidDriver(serverUrl));
+            if ("iOS".equalsIgnoreCase(platform)) {
+                driver = createIOSDriver(serverUrl);
+            } else {
+                driver = createAndroidDriver(serverUrl);
+            }
         }
     }
 
     public static AppiumDriver getDriver() {
-        return DRIVER.get();
+        return driver;
     }
 
     public static AndroidDriver getAndroidDriver() {
@@ -61,13 +66,14 @@ public final class DriverManager {
     }
 
     public static void quitDriver() {
-        AppiumDriver d = DRIVER.get();
-        if (d == null) return;
-        try {
-            d.quit();
-        } catch (Exception ignored) {
-        } finally {
-            DRIVER.remove();
+        synchronized (LOCK) {
+            if (driver == null) return;
+            try {
+                driver.quit();
+            } catch (Exception ignored) {
+            } finally {
+                driver = null;
+            }
         }
     }
 

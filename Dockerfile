@@ -11,7 +11,9 @@ COPY src ./src
 COPY scripts ./scripts
 COPY bundle-to-test ./bundle-to-test
 
-# Default Appium endpoint; override in docker-compose/Jenkins
-ENV APPIUM_SERVER_URL=http://appium:4723
+# Environment configuration for Docker execution
+ENV ENV=docker
+ENV APPIUM_SERVER_URL=http://host.docker.internal:4723
 
-CMD ["mvn", "-q", "test"]
+# Default command runs tests in docker mode
+CMD ["mvn", "test", "-Denv=docker"]

@@ -1,0 +1,9 @@
+username,password,expectedResult,description
+standard_user,secret_sauce,success,Valid standard user login
+locked_out_user,secret_sauce,locked,Locked out user should see error
+problem_user,secret_sauce,success,Problem user can login but has issues
+performance_glitch_user,secret_sauce,success,User with slow performance
+invalid_user,wrong_password,error,Invalid credentials should fail
+,secret_sauce,error,Empty username should fail
+standard_user,,error,Empty password should fail
+

@@ -6,9 +6,17 @@ pipeline {
         timestamps()
     }
 
+    parameters {
+        choice(
+            name: 'ENV',
+            choices: ['docker', 'local'],
+            description: 'Execution environment: docker (runs in container) or local (direct Maven)'
+        )
+    }
+
     environment {
         // Appium URL for Docker to reach Windows host
-        APPIUM_SERVER_URL = "http://host.docker.internal:4723/"
+        APPIUM_SERVER_URL = "http://host.docker.internal:4723"
     }
 
     stages {
@@ -18,28 +26,43 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
+        stage('Run Tests - Docker') {
+            when {
+                expression { params.ENV == 'docker' }
+            }
             steps {
-                bat 'docker build -t mobilex-test:ci .'
+                script {
+                    echo "╔══════════════════════════════════════════════════════════════╗"
+                    echo "║  Running tests in DOCKER mode                                ║"
+                    echo "║  Appium Server: ${APPIUM_SERVER_URL}                         ║"
+                    echo "╚══════════════════════════════════════════════════════════════╝"
+
+                    bat '''
+                        docker build -t mobilex-test:ci .
+                        docker run --rm ^
+                            --add-host=host.docker.internal:host-gateway ^
+                            -e APPIUM_SERVER_URL=%APPIUM_SERVER_URL% ^
+                            -e ENV=docker ^
+                            -v "%CD%\\target":/workspace/target ^
+                            -w /workspace ^
+                            mobilex-test:ci mvn test -Denv=docker
+                    '''
+                }
             }
         }
 
-        stage('Run Tests (Docker)') {
+        stage('Run Tests - Local') {
+            when {
+                expression { params.ENV == 'local' }
+            }
             steps {
                 script {
-                    echo "Running tests against Appium at ${APPIUM_SERVER_URL}"
+                    echo "╔══════════════════════════════════════════════════════════════╗"
+                    echo "║  Running tests in LOCAL mode                                 ║"
+                    echo "║  Appium Server: http://127.0.0.1:4723                        ║"
+                    echo "╚══════════════════════════════════════════════════════════════╝"
 
-                    // We pass the Windows Current Directory (%CD%) into the container
-                    // as a variable named 'HOST_WORKSPACE'
-                    bat '''
-                        docker run --rm ^
-                        --add-host=host.docker.internal:host-gateway ^
-                        -e APPIUM_SERVER_URL=%APPIUM_SERVER_URL% ^
-                          -e HOST_WORKSPACE="%WORKSPACE%" ^
-                        -v "%CD%":/workspace ^
-                        -w /workspace ^
-                        mobilex-test:ci mvn -q test
-                    '''
+                    bat 'mvn test -Denv=local'
                 }
             }
         }
@@ -49,6 +72,8 @@ pipeline {
         always {
             junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml'
             archiveArtifacts artifacts: 'target/surefire-reports/**/*', allowEmptyArchive: true
+            archiveArtifacts artifacts: 'target/allure-results/**/*', allowEmptyArchive: true
+            archiveArtifacts artifacts: 'target/reports/**/*', allowEmptyArchive: true
         }
     }
 }

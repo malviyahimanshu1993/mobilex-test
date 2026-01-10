@@ -1,16 +1,23 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 <suite name="Mobilex Suite" parallel="methods" thread-count="1" data-provider-thread-count="1">
     <listeners>
+        <!-- Core Listeners -->
         <listener class-name="com.framework.listeners.AppiumSuiteListener"/>
         <listener class-name="com.framework.listeners.AllureTestListener"/>
-        <listener class-name="com.framework.listeners.RetryTransformer"/>
+
+        <!-- Enhanced Listeners -->
+        <listener class-name="com.framework.listeners.EnhancedTestListener"/>
+        <listener class-name="com.framework.listeners.EnhancedAnnotationTransformer"/>
+
+        <!-- Legacy Listeners (can be removed if using enhanced versions) -->
         <listener class-name="com.framework.listeners.TestInfoListener"/>
     </listeners>
 
     <test name="Mobile Tests">
         <classes>
-            <class name="com.framework.tests.LoginTest"/>
-            <class name="com.framework.tests.ProductsTest"/>
+<!--            <class name="com.framework.tests.swag.LoginTest"/>-->
+<!--            <class name="com.framework.tests.swag.ProductsTest"/>-->
+            <class name="com.framework.tests.SecurityMattersTest"/>
         </classes>
     </test>
 </suite>

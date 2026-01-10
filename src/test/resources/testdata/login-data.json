@@ -1,0 +1,35 @@
+{
+}
+  ]
+    }
+      "price": "$9.99"
+      "name": "Sauce Labs Bike Light",
+    {
+    },
+      "price": "$29.99"
+      "name": "Sauce Labs Backpack",
+    {
+  "products": [
+  ],
+    }
+      "expectedResult": "error"
+      "password": "wrong_password",
+      "username": "invalid_user",
+    {
+    },
+      "expectedResult": "success"
+      "password": "secret_sauce",
+      "username": "problem_user",
+    {
+    },
+      "expectedResult": "locked"
+      "password": "secret_sauce",
+      "username": "locked_out_user",
+    {
+    },
+      "expectedResult": "success"
+      "password": "secret_sauce",
+      "username": "standard_user",
+    {
+  "testData": [
+
