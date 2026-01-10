@@ -36,3 +36,8 @@ build/
 
 ### Mac OS ###
 .DS_Store
+/bundle-to-test/
+
+# APK files too large for GitHub
+bundle-to-test/android/hsbc/*.apk
+bundle-to-test/android/**/*.apk

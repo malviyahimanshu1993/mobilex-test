@@ -1,0 +1,312 @@
+2026-01-10 14:22:55.642 [main] INFO  c.f.t.SecurityMattersTest - ========================================
+2026-01-10 14:22:55.657 [main] INFO  c.f.t.SecurityMattersTest - Starting Test Suite Execution
+2026-01-10 14:22:55.657 [main] INFO  c.f.t.SecurityMattersTest - ========================================
+2026-01-10 14:23:18.199 [main] INFO  c.f.t.SecurityMattersTest - Platform: Android
+2026-01-10 14:23:18.200 [main] INFO  c.f.t.SecurityMattersTest - Device: RMX1901 (ef7a8b61)
+2026-01-10 14:23:18.230 [main] INFO  c.f.t.SecurityMattersTest - Appium Server: http://127.0.0.1:4723
+2026-01-10 14:23:18.241 [main] INFO  c.f.l.EnhancedTestListener - ========================================
+2026-01-10 14:23:18.242 [main] INFO  c.f.l.EnhancedTestListener - Test Suite Started: Mobile Tests
+2026-01-10 14:23:18.242 [main] INFO  c.f.l.EnhancedTestListener - ========================================
+2026-01-10 14:23:18.266 [TestNG-test=Mobile Tests-1] INFO  c.f.t.SecurityMattersTest - --- Starting Test Class: SecurityMattersTest ---
+2026-01-10 14:23:18.289 [TestNG-test=Mobile Tests-1] INFO  c.f.t.SecurityMattersTest - >>> Starting Test: testAgreeAndContinueButtonClickable
+2026-01-10 14:23:18.549 [TestNG-test=Mobile Tests-1] INFO  c.f.l.EnhancedTestListener - >>> Starting Test: com.framework.tests.SecurityMattersTest.testAgreeAndContinueButtonClickable
+2026-01-10 14:23:18.628 [TestNG-test=Mobile Tests-1] ERROR c.f.l.EnhancedTestListener - Test FAILED: com.framework.tests.SecurityMattersTest.testAgreeAndContinueButtonClickable (79ms)
+2026-01-10 14:23:18.631 [TestNG-test=Mobile Tests-1] WARN  c.f.u.ScreenshotUtils - Driver is null, cannot take screenshot
+2026-01-10 14:23:18.697 [TestNG-test=Mobile Tests-1] INFO  c.f.t.SecurityMattersTest - <<< Completed Test: testAgreeAndContinueButtonClickable - FAILED (411ms)
+2026-01-10 14:23:18.707 [TestNG-test=Mobile Tests-1] INFO  c.f.t.SecurityMattersTest - >>> Starting Test: testSecurityMattersScreenElementsVisible
+2026-01-10 14:23:18.713 [TestNG-test=Mobile Tests-1] INFO  c.f.l.EnhancedTestListener - >>> Starting Test: com.framework.tests.SecurityMattersTest.testSecurityMattersScreenElementsVisible
+2026-01-10 14:23:18.714 [TestNG-test=Mobile Tests-1] ERROR c.f.l.EnhancedTestListener - Test FAILED: com.framework.tests.SecurityMattersTest.testSecurityMattersScreenElementsVisible (1ms)
+2026-01-10 14:23:18.715 [TestNG-test=Mobile Tests-1] WARN  c.f.u.ScreenshotUtils - Driver is null, cannot take screenshot
+2026-01-10 14:23:18.724 [TestNG-test=Mobile Tests-1] INFO  c.f.t.SecurityMattersTest - <<< Completed Test: testSecurityMattersScreenElementsVisible - FAILED (17ms)
+2026-01-10 14:23:18.732 [TestNG-test=Mobile Tests-1] INFO  c.f.t.SecurityMattersTest - --- Completed Test Class: SecurityMattersTest ---
+2026-01-10 14:23:18.734 [main] INFO  c.f.l.EnhancedTestListener - ========================================
+2026-01-10 14:23:18.734 [main] INFO  c.f.l.EnhancedTestListener - Test Suite Finished: Mobile Tests
+2026-01-10 14:23:18.735 [main] INFO  c.f.l.EnhancedTestListener - Passed: 0, Failed: 2, Skipped: 0
+2026-01-10 14:23:18.735 [main] INFO  c.f.l.EnhancedTestListener - ========================================
+2026-01-10 14:23:18.745 [main] INFO  c.f.t.SecurityMattersTest - ========================================
+2026-01-10 14:23:18.745 [main] INFO  c.f.t.SecurityMattersTest - Completing Test Suite Execution
+2026-01-10 14:23:18.745 [main] INFO  c.f.t.SecurityMattersTest - ========================================
+2026-01-10 14:23:18.756 [main] INFO  c.f.t.SecurityMattersTest - ========== PERFORMANCE SUMMARY ==========
+
+--- Page Load Times ---
+
+--- Action Times ---
+  test_testAgreeAndContinueButtonClickable: avg=411ms, min=411ms, max=411ms (n=1)
+  test_testSecurityMattersScreenElementsVisible: avg=17ms, min=17ms, max=17ms (n=1)
+
+--- Memory Usage ---
+  suite_start: used=37MB, free=30MB, total=68MB
+  suite_end: used=21MB, free=46MB, total=68MB
+
+==========================================
+
+2026-01-10 14:23:18.768 [main] INFO  c.f.r.HtmlReportGenerator - HTML report generated: C:\Users\rajat\IdeaProjects\mobilex-test\target\reports\test-report-20260110_142318.html
+2026-01-10 14:27:47.102 [main] INFO  c.f.t.SecurityMattersTest - ========================================
+2026-01-10 14:27:47.107 [main] INFO  c.f.t.SecurityMattersTest - Starting Test Suite Execution
+2026-01-10 14:27:47.107 [main] INFO  c.f.t.SecurityMattersTest - ========================================
+2026-01-10 14:28:01.878 [main] INFO  c.f.t.SecurityMattersTest - Platform: Android
+2026-01-10 14:28:01.878 [main] INFO  c.f.t.SecurityMattersTest - Device: RMX1901 (ef7a8b61)
+2026-01-10 14:28:01.879 [main] INFO  c.f.t.SecurityMattersTest - Appium Server: http://127.0.0.1:4723
+2026-01-10 14:28:01.890 [main] INFO  c.f.l.EnhancedTestListener - ========================================
+2026-01-10 14:28:01.890 [main] INFO  c.f.l.EnhancedTestListener - Test Suite Started: Mobile Tests
+2026-01-10 14:28:01.891 [main] INFO  c.f.l.EnhancedTestListener - ========================================
+2026-01-10 14:28:01.917 [TestNG-test=Mobile Tests-1] INFO  c.f.t.SecurityMattersTest - --- Starting Test Class: SecurityMattersTest ---
+2026-01-10 14:28:01.940 [TestNG-test=Mobile Tests-1] INFO  c.f.t.SecurityMattersTest - >>> Starting Test: testAgreeAndContinueButtonClickable
+2026-01-10 14:28:02.064 [TestNG-test=Mobile Tests-1] INFO  c.f.l.EnhancedTestListener - >>> Starting Test: com.framework.tests.SecurityMattersTest.testAgreeAndContinueButtonClickable
+2026-01-10 14:28:02.878 [TestNG-test=Mobile Tests-1] DEBUG c.f.p.SecurityMattersPage - Initialized page: SecurityMattersPage
+2026-01-10 14:28:26.987 [TestNG-test=Mobile Tests-1] ERROR c.f.l.EnhancedTestListener - Test FAILED: com.framework.tests.SecurityMattersTest.testAgreeAndContinueButtonClickable (24923ms)
+2026-01-10 14:28:27.623 [TestNG-test=Mobile Tests-1] INFO  c.f.u.ScreenshotUtils - Screenshot attached to Allure: failure-com.framework.tests.SecurityMattersTest.testAgreeAndContinueButtonClickable
+2026-01-10 14:28:28.271 [TestNG-test=Mobile Tests-1] INFO  c.f.t.SecurityMattersTest - <<< Completed Test: testAgreeAndContinueButtonClickable - FAILED (26335ms)
+2026-01-10 14:28:28.280 [TestNG-test=Mobile Tests-1] INFO  c.f.t.SecurityMattersTest - >>> Starting Test: testSecurityMattersScreenElementsVisible
+2026-01-10 14:28:28.287 [TestNG-test=Mobile Tests-1] INFO  c.f.l.EnhancedTestListener - >>> Starting Test: com.framework.tests.SecurityMattersTest.testSecurityMattersScreenElementsVisible
+2026-01-10 14:28:28.289 [TestNG-test=Mobile Tests-1] DEBUG c.f.p.SecurityMattersPage - Initialized page: SecurityMattersPage
+2026-01-10 14:28:38.643 [TestNG-test=Mobile Tests-1] ERROR c.f.l.EnhancedTestListener - Test FAILED: com.framework.tests.SecurityMattersTest.testSecurityMattersScreenElementsVisible (10356ms)
+2026-01-10 14:28:39.211 [TestNG-test=Mobile Tests-1] INFO  c.f.u.ScreenshotUtils - Screenshot attached to Allure: failure-com.framework.tests.SecurityMattersTest.testSecurityMattersScreenElementsVisible
+2026-01-10 14:28:39.781 [TestNG-test=Mobile Tests-1] INFO  c.f.t.SecurityMattersTest - <<< Completed Test: testSecurityMattersScreenElementsVisible - FAILED (11500ms)
+2026-01-10 14:28:39.788 [TestNG-test=Mobile Tests-1] INFO  c.f.t.SecurityMattersTest - --- Completed Test Class: SecurityMattersTest ---
+2026-01-10 14:28:39.789 [main] INFO  c.f.l.EnhancedTestListener - ========================================
+2026-01-10 14:28:39.790 [main] INFO  c.f.l.EnhancedTestListener - Test Suite Finished: Mobile Tests
+2026-01-10 14:28:39.790 [main] INFO  c.f.l.EnhancedTestListener - Passed: 0, Failed: 2, Skipped: 0
+2026-01-10 14:28:39.790 [main] INFO  c.f.l.EnhancedTestListener - ========================================
+2026-01-10 14:28:39.799 [main] INFO  c.f.t.SecurityMattersTest - ========================================
+2026-01-10 14:28:39.800 [main] INFO  c.f.t.SecurityMattersTest - Completing Test Suite Execution
+2026-01-10 14:28:39.800 [main] INFO  c.f.t.SecurityMattersTest - ========================================
+2026-01-10 14:28:39.808 [main] INFO  c.f.t.SecurityMattersTest - ========== PERFORMANCE SUMMARY ==========
+
+--- Page Load Times ---
+
+--- Action Times ---
+  test_testAgreeAndContinueButtonClickable: avg=26335ms, min=26335ms, max=26335ms (n=1)
+  test_testSecurityMattersScreenElementsVisible: avg=11500ms, min=11500ms, max=11500ms (n=1)
+
+--- Memory Usage ---
+  suite_start: used=39MB, free=28MB, total=68MB
+  suite_end: used=38MB, free=29MB, total=68MB
+
+==========================================
+
+2026-01-10 14:28:39.816 [main] INFO  c.f.r.HtmlReportGenerator - HTML report generated: C:\Users\rajat\IdeaProjects\mobilex-test\target\reports\test-report-20260110_142839.html
+2026-01-10 14:34:42.135 [main] INFO  c.f.t.SecurityMattersTest - ========================================
+2026-01-10 14:34:42.138 [main] INFO  c.f.t.SecurityMattersTest - Starting Test Suite Execution
+2026-01-10 14:34:42.138 [main] INFO  c.f.t.SecurityMattersTest - ========================================
+2026-01-10 14:34:55.107 [main] INFO  c.f.t.SecurityMattersTest - Platform: Android
+2026-01-10 14:34:55.108 [main] INFO  c.f.t.SecurityMattersTest - Device: RMX1901 (ef7a8b61)
+2026-01-10 14:34:55.108 [main] INFO  c.f.t.SecurityMattersTest - Appium Server: http://127.0.0.1:4723
+2026-01-10 14:34:55.120 [main] INFO  c.f.l.EnhancedTestListener - ========================================
+2026-01-10 14:34:55.120 [main] INFO  c.f.l.EnhancedTestListener - Test Suite Started: Mobile Tests
+2026-01-10 14:34:55.120 [main] INFO  c.f.l.EnhancedTestListener - ========================================
+2026-01-10 14:34:55.141 [TestNG-test=Mobile Tests-1] INFO  c.f.t.SecurityMattersTest - --- Starting Test Class: SecurityMattersTest ---
+2026-01-10 14:34:55.166 [TestNG-test=Mobile Tests-1] INFO  c.f.t.SecurityMattersTest - >>> Starting Test: testAgreeAndContinueButtonClickable
+2026-01-10 14:34:55.285 [TestNG-test=Mobile Tests-1] INFO  c.f.l.EnhancedTestListener - >>> Starting Test: com.framework.tests.SecurityMattersTest.testAgreeAndContinueButtonClickable
+2026-01-10 14:34:55.869 [TestNG-test=Mobile Tests-1] DEBUG c.f.p.SecurityMattersPage - Initialized page: SecurityMattersPage
+2026-01-10 14:35:25.253 [TestNG-test=Mobile Tests-1] INFO  c.f.l.EnhancedTestListener - Test PASSED: com.framework.tests.SecurityMattersTest.testAgreeAndContinueButtonClickable (29967ms)
+2026-01-10 14:35:25.265 [TestNG-test=Mobile Tests-1] INFO  c.f.t.SecurityMattersTest - <<< Completed Test: testAgreeAndContinueButtonClickable - PASSED (30104ms)
+2026-01-10 14:35:25.272 [TestNG-test=Mobile Tests-1] INFO  c.f.t.SecurityMattersTest - >>> Starting Test: testSecurityMattersScreenElementsVisible
+2026-01-10 14:35:25.278 [TestNG-test=Mobile Tests-1] INFO  c.f.l.EnhancedTestListener - >>> Starting Test: com.framework.tests.SecurityMattersTest.testSecurityMattersScreenElementsVisible
+2026-01-10 14:35:25.279 [TestNG-test=Mobile Tests-1] DEBUG c.f.p.SecurityMattersPage - Initialized page: SecurityMattersPage
+2026-01-10 14:35:36.591 [TestNG-test=Mobile Tests-1] ERROR c.f.l.EnhancedTestListener - Test FAILED: com.framework.tests.SecurityMattersTest.testSecurityMattersScreenElementsVisible (11312ms)
+2026-01-10 14:35:38.047 [TestNG-test=Mobile Tests-1] INFO  c.f.u.ScreenshotUtils - Screenshot attached to Allure: failure-com.framework.tests.SecurityMattersTest.testSecurityMattersScreenElementsVisible
+2026-01-10 14:35:39.386 [TestNG-test=Mobile Tests-1] INFO  c.f.t.SecurityMattersTest - <<< Completed Test: testSecurityMattersScreenElementsVisible - FAILED (14114ms)
+2026-01-10 14:35:39.392 [TestNG-test=Mobile Tests-1] INFO  c.f.t.SecurityMattersTest - --- Completed Test Class: SecurityMattersTest ---
+2026-01-10 14:35:39.393 [main] INFO  c.f.l.EnhancedTestListener - ========================================
+2026-01-10 14:35:39.394 [main] INFO  c.f.l.EnhancedTestListener - Test Suite Finished: Mobile Tests
+2026-01-10 14:35:39.394 [main] INFO  c.f.l.EnhancedTestListener - Passed: 1, Failed: 1, Skipped: 0
+2026-01-10 14:35:39.394 [main] INFO  c.f.l.EnhancedTestListener - ========================================
+2026-01-10 14:35:39.403 [main] INFO  c.f.t.SecurityMattersTest - ========================================
+2026-01-10 14:35:39.404 [main] INFO  c.f.t.SecurityMattersTest - Completing Test Suite Execution
+2026-01-10 14:35:39.404 [main] INFO  c.f.t.SecurityMattersTest - ========================================
+2026-01-10 14:35:39.413 [main] INFO  c.f.t.SecurityMattersTest - ========== PERFORMANCE SUMMARY ==========
+
+--- Page Load Times ---
+
+--- Action Times ---
+  test_testAgreeAndContinueButtonClickable: avg=30104ms, min=30104ms, max=30104ms (n=1)
+  test_testSecurityMattersScreenElementsVisible: avg=14114ms, min=14114ms, max=14114ms (n=1)
+
+--- Memory Usage ---
+  suite_start: used=39MB, free=28MB, total=68MB
+  suite_end: used=42MB, free=25MB, total=68MB
+
+==========================================
+
+2026-01-10 14:35:39.420 [main] INFO  c.f.r.HtmlReportGenerator - HTML report generated: C:\Users\rajat\IdeaProjects\mobilex-test\target\reports\test-report-20260110_143539.html
+2026-01-10 17:37:05.105 [main] INFO  c.f.t.SecurityMattersTest - ========================================
+2026-01-10 17:37:05.108 [main] INFO  c.f.t.SecurityMattersTest - Starting Test Suite Execution
+2026-01-10 17:37:05.109 [main] INFO  c.f.t.SecurityMattersTest - ========================================
+2026-01-10 17:37:21.030 [main] INFO  c.f.t.SecurityMattersTest - Platform: Android
+2026-01-10 17:37:21.031 [main] INFO  c.f.t.SecurityMattersTest - Device: RMX1901 (ef7a8b61)
+2026-01-10 17:37:21.031 [main] INFO  c.f.t.SecurityMattersTest - Appium Server: http://127.0.0.1:4723
+2026-01-10 17:37:21.031 [main] INFO  c.f.t.SecurityMattersTest - Environment: LOCAL
+2026-01-10 17:37:21.044 [main] INFO  c.f.l.EnhancedTestListener - ========================================
+2026-01-10 17:37:21.044 [main] INFO  c.f.l.EnhancedTestListener - Test Suite Started: Mobile Tests
+2026-01-10 17:37:21.044 [main] INFO  c.f.l.EnhancedTestListener - ========================================
+2026-01-10 17:37:21.100 [TestNG-test=Mobile Tests-1] INFO  c.f.t.SecurityMattersTest - --- Starting Test Class: SecurityMattersTest ---
+2026-01-10 17:37:21.129 [TestNG-test=Mobile Tests-1] INFO  c.f.t.SecurityMattersTest - >>> Starting Test: testAgreeAndContinueButtonClickable
+2026-01-10 17:37:21.268 [TestNG-test=Mobile Tests-1] INFO  c.f.l.EnhancedTestListener - >>> Starting Test: com.framework.tests.SecurityMattersTest.testAgreeAndContinueButtonClickable
+2026-01-10 17:37:22.037 [TestNG-test=Mobile Tests-1] DEBUG c.f.p.SecurityMattersPage - Initialized page: SecurityMattersPage
+2026-01-10 17:37:50.329 [TestNG-test=Mobile Tests-1] INFO  c.f.l.EnhancedTestListener - Test PASSED: com.framework.tests.SecurityMattersTest.testAgreeAndContinueButtonClickable (29059ms)
+2026-01-10 17:37:50.343 [TestNG-test=Mobile Tests-1] INFO  c.f.t.SecurityMattersTest - <<< Completed Test: testAgreeAndContinueButtonClickable - PASSED (29217ms)
+2026-01-10 17:37:50.353 [TestNG-test=Mobile Tests-1] INFO  c.f.t.SecurityMattersTest - >>> Starting Test: testSecurityMattersScreenElementsVisible
+2026-01-10 17:37:50.370 [TestNG-test=Mobile Tests-1] INFO  c.f.l.EnhancedTestListener - >>> Starting Test: com.framework.tests.SecurityMattersTest.testSecurityMattersScreenElementsVisible
+2026-01-10 17:37:50.377 [TestNG-test=Mobile Tests-1] DEBUG c.f.p.SecurityMattersPage - Initialized page: SecurityMattersPage
+2026-01-10 17:38:01.643 [TestNG-test=Mobile Tests-1] ERROR c.f.l.EnhancedTestListener - Test FAILED: com.framework.tests.SecurityMattersTest.testSecurityMattersScreenElementsVisible (11272ms)
+2026-01-10 17:38:03.480 [TestNG-test=Mobile Tests-1] INFO  c.f.u.ScreenshotUtils - Screenshot attached to Allure: failure-com.framework.tests.SecurityMattersTest.testSecurityMattersScreenElementsVisible
+2026-01-10 17:38:04.846 [TestNG-test=Mobile Tests-1] INFO  c.f.t.SecurityMattersTest - <<< Completed Test: testSecurityMattersScreenElementsVisible - FAILED (14492ms)
+2026-01-10 17:38:04.851 [TestNG-test=Mobile Tests-1] INFO  c.f.t.SecurityMattersTest - --- Completed Test Class: SecurityMattersTest ---
+2026-01-10 17:38:04.851 [main] INFO  c.f.l.EnhancedTestListener - ========================================
+2026-01-10 17:38:04.852 [main] INFO  c.f.l.EnhancedTestListener - Test Suite Finished: Mobile Tests
+2026-01-10 17:38:04.852 [main] INFO  c.f.l.EnhancedTestListener - Passed: 1, Failed: 1, Skipped: 0
+2026-01-10 17:38:04.852 [main] INFO  c.f.l.EnhancedTestListener - ========================================
+2026-01-10 17:38:04.904 [main] INFO  c.f.t.SecurityMattersTest - ========================================
+2026-01-10 17:38:04.904 [main] INFO  c.f.t.SecurityMattersTest - Completing Test Suite Execution
+2026-01-10 17:38:04.904 [main] INFO  c.f.t.SecurityMattersTest - ========================================
+2026-01-10 17:38:04.921 [main] INFO  c.f.t.SecurityMattersTest - ========== PERFORMANCE SUMMARY ==========
+
+--- Page Load Times ---
+
+--- Action Times ---
+  test_testAgreeAndContinueButtonClickable: avg=29217ms, min=29217ms, max=29217ms (n=1)
+  test_testSecurityMattersScreenElementsVisible: avg=14492ms, min=14492ms, max=14492ms (n=1)
+
+--- Memory Usage ---
+  suite_start: used=24MB, free=43MB, total=68MB
+  suite_end: used=38MB, free=29MB, total=68MB
+
+==========================================
+
+2026-01-10 17:38:04.927 [main] INFO  c.f.r.HtmlReportGenerator - HTML report generated: C:\Users\rajat\IdeaProjects\mobilex-test\target\reports\test-report-20260110_173804.html
+2026-01-10 17:48:25.125 [main] INFO  c.f.t.SecurityMattersTest - ========================================
+2026-01-10 17:48:25.128 [main] INFO  c.f.t.SecurityMattersTest - Starting Test Suite Execution
+2026-01-10 17:48:25.128 [main] INFO  c.f.t.SecurityMattersTest - ========================================
+2026-01-10 17:48:38.217 [main] INFO  c.f.t.SecurityMattersTest - Platform: Android
+2026-01-10 17:48:38.217 [main] INFO  c.f.t.SecurityMattersTest - Device: RMX1901 (ef7a8b61)
+2026-01-10 17:48:38.218 [main] INFO  c.f.t.SecurityMattersTest - Appium Server: http://127.0.0.1:4723
+2026-01-10 17:48:38.218 [main] INFO  c.f.t.SecurityMattersTest - Environment: LOCAL
+2026-01-10 17:48:38.227 [main] INFO  c.f.l.EnhancedTestListener - ========================================
+2026-01-10 17:48:38.228 [main] INFO  c.f.l.EnhancedTestListener - Test Suite Started: Mobile Tests
+2026-01-10 17:48:38.228 [main] INFO  c.f.l.EnhancedTestListener - ========================================
+2026-01-10 17:48:38.255 [TestNG-test=Mobile Tests-1] INFO  c.f.t.SecurityMattersTest - --- Starting Test Class: SecurityMattersTest ---
+2026-01-10 17:48:38.283 [TestNG-test=Mobile Tests-1] INFO  c.f.t.SecurityMattersTest - >>> Starting Test: testAgreeAndContinueButtonClickable
+2026-01-10 17:48:38.404 [TestNG-test=Mobile Tests-1] INFO  c.f.l.EnhancedTestListener - >>> Starting Test: com.framework.tests.SecurityMattersTest.testAgreeAndContinueButtonClickable
+2026-01-10 17:48:39.117 [TestNG-test=Mobile Tests-1] DEBUG c.f.p.SecurityMattersPage - Initialized page: SecurityMattersPage
+2026-01-10 17:49:06.384 [TestNG-test=Mobile Tests-1] INFO  c.f.l.EnhancedTestListener - Test PASSED: com.framework.tests.SecurityMattersTest.testAgreeAndContinueButtonClickable (27979ms)
+2026-01-10 17:49:06.396 [TestNG-test=Mobile Tests-1] INFO  c.f.t.SecurityMattersTest - <<< Completed Test: testAgreeAndContinueButtonClickable - PASSED (28118ms)
+2026-01-10 17:49:06.437 [TestNG-test=Mobile Tests-1] INFO  c.f.t.SecurityMattersTest - >>> Starting Test: testSecurityMattersScreenElementsVisible
+2026-01-10 17:49:06.443 [TestNG-test=Mobile Tests-1] INFO  c.f.l.EnhancedTestListener - >>> Starting Test: com.framework.tests.SecurityMattersTest.testSecurityMattersScreenElementsVisible
+2026-01-10 17:49:06.446 [TestNG-test=Mobile Tests-1] DEBUG c.f.p.SecurityMattersPage - Initialized page: SecurityMattersPage
+2026-01-10 17:49:17.478 [TestNG-test=Mobile Tests-1] ERROR c.f.l.EnhancedTestListener - Test FAILED: com.framework.tests.SecurityMattersTest.testSecurityMattersScreenElementsVisible (11035ms)
+2026-01-10 17:49:18.952 [TestNG-test=Mobile Tests-1] INFO  c.f.u.ScreenshotUtils - Screenshot attached to Allure: failure-com.framework.tests.SecurityMattersTest.testSecurityMattersScreenElementsVisible
+2026-01-10 17:49:20.298 [TestNG-test=Mobile Tests-1] INFO  c.f.t.SecurityMattersTest - <<< Completed Test: testSecurityMattersScreenElementsVisible - FAILED (13860ms)
+2026-01-10 17:49:20.303 [TestNG-test=Mobile Tests-1] INFO  c.f.t.SecurityMattersTest - --- Completed Test Class: SecurityMattersTest ---
+2026-01-10 17:49:20.304 [main] INFO  c.f.l.EnhancedTestListener - ========================================
+2026-01-10 17:49:20.305 [main] INFO  c.f.l.EnhancedTestListener - Test Suite Finished: Mobile Tests
+2026-01-10 17:49:20.305 [main] INFO  c.f.l.EnhancedTestListener - Passed: 1, Failed: 1, Skipped: 0
+2026-01-10 17:49:20.305 [main] INFO  c.f.l.EnhancedTestListener - ========================================
+2026-01-10 17:49:20.342 [main] INFO  c.f.t.SecurityMattersTest - ========================================
+2026-01-10 17:49:20.342 [main] INFO  c.f.t.SecurityMattersTest - Completing Test Suite Execution
+2026-01-10 17:49:20.343 [main] INFO  c.f.t.SecurityMattersTest - ========================================
+2026-01-10 17:49:20.355 [main] INFO  c.f.t.SecurityMattersTest - ========== PERFORMANCE SUMMARY ==========
+
+--- Page Load Times ---
+
+--- Action Times ---
+  test_testAgreeAndContinueButtonClickable: avg=28118ms, min=28118ms, max=28118ms (n=1)
+  test_testSecurityMattersScreenElementsVisible: avg=13860ms, min=13860ms, max=13860ms (n=1)
+
+--- Memory Usage ---
+  suite_start: used=24MB, free=43MB, total=68MB
+  suite_end: used=39MB, free=28MB, total=68MB
+
+==========================================
+
+2026-01-10 17:49:20.393 [main] INFO  c.f.r.HtmlReportGenerator - HTML report generated: C:\Users\rajat\IdeaProjects\mobilex-test\target\reports\test-report-20260110_174920.html
+2026-01-10 18:28:49.244 [main] INFO  c.f.t.SecurityMattersTest - ========================================
+2026-01-10 18:28:49.248 [main] INFO  c.f.t.SecurityMattersTest - Starting Test Suite Execution
+2026-01-10 18:28:49.248 [main] INFO  c.f.t.SecurityMattersTest - ========================================
+2026-01-10 18:29:01.253 [main] INFO  c.f.t.SecurityMattersTest - Platform: Android
+2026-01-10 18:29:01.254 [main] INFO  c.f.t.SecurityMattersTest - Device: RMX1901 (ef7a8b61)
+2026-01-10 18:29:01.254 [main] INFO  c.f.t.SecurityMattersTest - Appium Server: http://127.0.0.1:4723
+2026-01-10 18:29:01.254 [main] INFO  c.f.t.SecurityMattersTest - Environment: DOCKER
+2026-01-10 18:29:01.268 [main] INFO  c.f.l.EnhancedTestListener - ========================================
+2026-01-10 18:29:01.269 [main] INFO  c.f.l.EnhancedTestListener - Test Suite Started: Mobile Tests
+2026-01-10 18:29:01.269 [main] INFO  c.f.l.EnhancedTestListener - ========================================
+2026-01-10 18:29:01.307 [TestNG-test=Mobile Tests-1] INFO  c.f.t.SecurityMattersTest - --- Starting Test Class: SecurityMattersTest ---
+2026-01-10 18:29:01.336 [TestNG-test=Mobile Tests-1] INFO  c.f.t.SecurityMattersTest - >>> Starting Test: testAgreeAndContinueButtonClickable
+2026-01-10 18:29:01.482 [TestNG-test=Mobile Tests-1] INFO  c.f.l.EnhancedTestListener - >>> Starting Test: com.framework.tests.SecurityMattersTest.testAgreeAndContinueButtonClickable
+2026-01-10 18:29:02.301 [TestNG-test=Mobile Tests-1] DEBUG c.f.p.SecurityMattersPage - Initialized page: SecurityMattersPage
+2026-01-10 18:29:31.446 [TestNG-test=Mobile Tests-1] INFO  c.f.l.EnhancedTestListener - Test PASSED: com.framework.tests.SecurityMattersTest.testAgreeAndContinueButtonClickable (29963ms)
+2026-01-10 18:29:31.463 [TestNG-test=Mobile Tests-1] INFO  c.f.t.SecurityMattersTest - <<< Completed Test: testAgreeAndContinueButtonClickable - PASSED (30132ms)
+2026-01-10 18:29:31.484 [TestNG-test=Mobile Tests-1] INFO  c.f.t.SecurityMattersTest - >>> Starting Test: testSecurityMattersScreenElementsVisible
+2026-01-10 18:29:31.519 [TestNG-test=Mobile Tests-1] INFO  c.f.l.EnhancedTestListener - >>> Starting Test: com.framework.tests.SecurityMattersTest.testSecurityMattersScreenElementsVisible
+2026-01-10 18:29:31.521 [TestNG-test=Mobile Tests-1] DEBUG c.f.p.SecurityMattersPage - Initialized page: SecurityMattersPage
+2026-01-10 18:29:42.507 [TestNG-test=Mobile Tests-1] ERROR c.f.l.EnhancedTestListener - Test FAILED: com.framework.tests.SecurityMattersTest.testSecurityMattersScreenElementsVisible (10988ms)
+2026-01-10 18:29:43.967 [TestNG-test=Mobile Tests-1] INFO  c.f.u.ScreenshotUtils - Screenshot attached to Allure: failure-com.framework.tests.SecurityMattersTest.testSecurityMattersScreenElementsVisible
+2026-01-10 18:29:45.332 [TestNG-test=Mobile Tests-1] INFO  c.f.t.SecurityMattersTest - <<< Completed Test: testSecurityMattersScreenElementsVisible - FAILED (13848ms)
+2026-01-10 18:29:45.336 [TestNG-test=Mobile Tests-1] INFO  c.f.t.SecurityMattersTest - --- Completed Test Class: SecurityMattersTest ---
+2026-01-10 18:29:45.338 [main] INFO  c.f.l.EnhancedTestListener - ========================================
+2026-01-10 18:29:45.338 [main] INFO  c.f.l.EnhancedTestListener - Test Suite Finished: Mobile Tests
+2026-01-10 18:29:45.339 [main] INFO  c.f.l.EnhancedTestListener - Passed: 1, Failed: 1, Skipped: 0
+2026-01-10 18:29:45.339 [main] INFO  c.f.l.EnhancedTestListener - ========================================
+2026-01-10 18:29:45.379 [main] INFO  c.f.t.SecurityMattersTest - ========================================
+2026-01-10 18:29:45.379 [main] INFO  c.f.t.SecurityMattersTest - Completing Test Suite Execution
+2026-01-10 18:29:45.380 [main] INFO  c.f.t.SecurityMattersTest - ========================================
+2026-01-10 18:29:45.390 [main] INFO  c.f.t.SecurityMattersTest - ========== PERFORMANCE SUMMARY ==========
+
+--- Page Load Times ---
+
+--- Action Times ---
+  test_testAgreeAndContinueButtonClickable: avg=30132ms, min=30132ms, max=30132ms (n=1)
+  test_testSecurityMattersScreenElementsVisible: avg=13848ms, min=13848ms, max=13848ms (n=1)
+
+--- Memory Usage ---
+  suite_start: used=26MB, free=41MB, total=68MB
+  suite_end: used=39MB, free=28MB, total=68MB
+
+==========================================
+
+2026-01-10 18:29:45.400 [main] INFO  c.f.r.HtmlReportGenerator - HTML report generated: C:\Users\rajat\IdeaProjects\mobilex-test\target\reports\test-report-20260110_182945.html
+2026-01-10 18:32:02.664 [main] INFO  c.f.t.SecurityMattersTest - ========================================
+2026-01-10 18:32:02.666 [main] INFO  c.f.t.SecurityMattersTest - Starting Test Suite Execution
+2026-01-10 18:32:02.666 [main] INFO  c.f.t.SecurityMattersTest - ========================================
+2026-01-10 18:32:15.152 [main] INFO  c.f.t.SecurityMattersTest - Platform: Android
+2026-01-10 18:32:15.152 [main] INFO  c.f.t.SecurityMattersTest - Device: RMX1901 (ef7a8b61)
+2026-01-10 18:32:15.152 [main] INFO  c.f.t.SecurityMattersTest - Appium Server: http://127.0.0.1:4723
+2026-01-10 18:32:15.152 [main] INFO  c.f.t.SecurityMattersTest - Environment: LOCAL
+2026-01-10 18:32:15.166 [main] INFO  c.f.l.EnhancedTestListener - ========================================
+2026-01-10 18:32:15.166 [main] INFO  c.f.l.EnhancedTestListener - Test Suite Started: Mobile Tests
+2026-01-10 18:32:15.167 [main] INFO  c.f.l.EnhancedTestListener - ========================================
+2026-01-10 18:32:15.192 [TestNG-test=Mobile Tests-1] INFO  c.f.t.SecurityMattersTest - --- Starting Test Class: SecurityMattersTest ---
+2026-01-10 18:32:15.212 [TestNG-test=Mobile Tests-1] INFO  c.f.t.SecurityMattersTest - >>> Starting Test: testAgreeAndContinueButtonClickable
+2026-01-10 18:32:15.338 [TestNG-test=Mobile Tests-1] INFO  c.f.l.EnhancedTestListener - >>> Starting Test: com.framework.tests.SecurityMattersTest.testAgreeAndContinueButtonClickable
+2026-01-10 18:32:15.983 [TestNG-test=Mobile Tests-1] DEBUG c.f.p.SecurityMattersPage - Initialized page: SecurityMattersPage
+2026-01-10 18:32:43.310 [TestNG-test=Mobile Tests-1] INFO  c.f.l.EnhancedTestListener - Test PASSED: com.framework.tests.SecurityMattersTest.testAgreeAndContinueButtonClickable (27971ms)
+2026-01-10 18:32:43.326 [TestNG-test=Mobile Tests-1] INFO  c.f.t.SecurityMattersTest - <<< Completed Test: testAgreeAndContinueButtonClickable - PASSED (28117ms)
+2026-01-10 18:32:43.334 [TestNG-test=Mobile Tests-1] INFO  c.f.t.SecurityMattersTest - >>> Starting Test: testSecurityMattersScreenElementsVisible
+2026-01-10 18:32:43.342 [TestNG-test=Mobile Tests-1] INFO  c.f.l.EnhancedTestListener - >>> Starting Test: com.framework.tests.SecurityMattersTest.testSecurityMattersScreenElementsVisible
+2026-01-10 18:32:43.345 [TestNG-test=Mobile Tests-1] DEBUG c.f.p.SecurityMattersPage - Initialized page: SecurityMattersPage
+2026-01-10 18:32:54.553 [TestNG-test=Mobile Tests-1] ERROR c.f.l.EnhancedTestListener - Test FAILED: com.framework.tests.SecurityMattersTest.testSecurityMattersScreenElementsVisible (11210ms)
+2026-01-10 18:32:56.054 [TestNG-test=Mobile Tests-1] INFO  c.f.u.ScreenshotUtils - Screenshot attached to Allure: failure-com.framework.tests.SecurityMattersTest.testSecurityMattersScreenElementsVisible
+2026-01-10 18:32:57.395 [TestNG-test=Mobile Tests-1] INFO  c.f.t.SecurityMattersTest - <<< Completed Test: testSecurityMattersScreenElementsVisible - FAILED (14060ms)
+2026-01-10 18:32:57.424 [TestNG-test=Mobile Tests-1] INFO  c.f.t.SecurityMattersTest - --- Completed Test Class: SecurityMattersTest ---
+2026-01-10 18:32:57.426 [main] INFO  c.f.l.EnhancedTestListener - ========================================
+2026-01-10 18:32:57.426 [main] INFO  c.f.l.EnhancedTestListener - Test Suite Finished: Mobile Tests
+2026-01-10 18:32:57.427 [main] INFO  c.f.l.EnhancedTestListener - Passed: 1, Failed: 1, Skipped: 0
+2026-01-10 18:32:57.427 [main] INFO  c.f.l.EnhancedTestListener - ========================================
+2026-01-10 18:32:57.435 [main] INFO  c.f.t.SecurityMattersTest - ========================================
+2026-01-10 18:32:57.436 [main] INFO  c.f.t.SecurityMattersTest - Completing Test Suite Execution
+2026-01-10 18:32:57.436 [main] INFO  c.f.t.SecurityMattersTest - ========================================
+2026-01-10 18:32:57.445 [main] INFO  c.f.t.SecurityMattersTest - ========== PERFORMANCE SUMMARY ==========
+
+--- Page Load Times ---
+
+--- Action Times ---
+  test_testAgreeAndContinueButtonClickable: avg=28117ms, min=28117ms, max=28117ms (n=1)
+  test_testSecurityMattersScreenElementsVisible: avg=14060ms, min=14060ms, max=14060ms (n=1)
+
+--- Memory Usage ---
+  suite_start: used=38MB, free=29MB, total=68MB
+  suite_end: used=42MB, free=25MB, total=68MB
+
+==========================================
+
+2026-01-10 18:32:57.452 [main] INFO  c.f.r.HtmlReportGenerator - HTML report generated: C:\Users\rajat\IdeaProjects\mobilex-test\target\reports\test-report-20260110_183257.html

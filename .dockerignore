@@ -1,0 +1,14 @@
+# Exclude unnecessary files from Docker build context
+target/
+.git/
+.idea/
+.vscode/
+*.iml
+*.class
+.DS_Store
+node_modules/
+
+# But DO include src and scripts
+!src/
+!scripts/
+
