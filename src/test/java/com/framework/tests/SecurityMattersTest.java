@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 @TestInfo(author = "Himanshu", priority = "Smoke", component = "Security")
 public class SecurityMattersTest extends BaseTest {
 
-    @Test
+    @Test(priority = 0)
     public void testSecurityMattersScreenElementsVisible() {
         SecurityMattersPage page = new SecurityMattersPage(getDriver())
                 .verifyHeadingIsVisible()
@@ -24,7 +24,7 @@ public class SecurityMattersTest extends BaseTest {
         Assert.assertFalse(page.getContentText().isEmpty(), "Content text should not be empty");
     }
 
-    @Test
+    @Test(priority = 1)
     public void testAgreeAndContinueButtonClickable() throws InterruptedException {
         SecurityMattersPage page = new SecurityMattersPage(getDriver())
                 .verifyHeadingIsVisible();
@@ -43,11 +43,11 @@ public class SecurityMattersTest extends BaseTest {
         getDriver().findElement(AppiumBy.androidUIAutomator("new UiSelector().textContains(\"I agree to the\")")).click();
         WebElement continueBtn = getDriver().findElement(AppiumBy.androidUIAutomator("new UiSelector().textContains(\"Continue\")"));
 
-        if(continueBtn.isEnabled()) {
+        if (continueBtn.isEnabled()) {
             continueBtn.click();
         }
         Thread.sleep(3000); // Temporary wait to observe the transition; replace with proper wait in real tests
 
-        System.out.println(getDriver().getPageSource());
+//        System.out.println(getDriver().getPagew());
     }
 }
